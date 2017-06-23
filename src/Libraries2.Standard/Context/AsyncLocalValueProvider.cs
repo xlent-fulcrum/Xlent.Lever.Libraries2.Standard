@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using Xlent.Lever.Libraries2.Standard.Assert;
 
@@ -10,6 +11,7 @@ namespace Xlent.Lever.Libraries2.Standard.Context
     /// <remarks>Updating values in a thread will not affect the value in parent/sibling threads</remarks>
     public class AsyncLocalValueProvider : IValueProvider
     {
+        private static readonly string Namespace = typeof(AsyncLocalValueProvider).Namespace;
         private static readonly AsyncLocal<Dictionary<string, object>> Holder;
 
         /// <summary>
@@ -33,7 +35,7 @@ namespace Xlent.Lever.Libraries2.Standard.Context
         {
             InternalContract.RequireNotNullOrWhitespace(name, nameof(name));
             InternalContract.RequireNotNull(data, nameof(data));
-            FulcrumAssert.IsNotNull(Holder);
+            FulcrumAssert.IsNotNull(Holder, $"{Namespace}: 07B2EC29-9231-4DC1-82FF-09DCB6EC87FA");
             if (Holder.Value == null)
             {
                 Holder.Value = new Dictionary<string, object>();

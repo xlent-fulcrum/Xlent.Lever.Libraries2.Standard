@@ -7,6 +7,8 @@ namespace Xlent.Lever.Libraries2.Standard.MultiTenant.Model
     /// </summary>
     public class Tenant : ITenant
     {
+        private static readonly string Namespace = typeof(Tenant).Namespace;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -16,7 +18,7 @@ namespace Xlent.Lever.Libraries2.Standard.MultiTenant.Model
             InternalContract.RequireNotNullOrWhitespace(environment, nameof(environment));
             Organization = organization?.ToLower();
             Environment = environment?.ToLower();
-            Validate();
+            Validate($"{Namespace}: 80BAC4F7-6369-4ACD-A34F-413A20E24C27");
         }
 
         /// <summary>
@@ -48,10 +50,12 @@ namespace Xlent.Lever.Libraries2.Standard.MultiTenant.Model
         }
 
         /// <inheritdoc />
-        public void Validate()
+        public void Validate(string errorLocaction)
         {
-            FulcrumValidate.IsNotNullOrWhiteSpace(Organization, nameof(Organization));
-            FulcrumValidate.IsNotNullOrWhiteSpace(Environment, nameof(Environment));
+            FulcrumValidate.IsNotNullOrWhiteSpace(Organization, nameof(Organization), errorLocaction);
+            FulcrumValidate.IsNotNullOrWhiteSpace(Environment, nameof(Environment), errorLocaction);
+            FulcrumValidate.AreEqual(Organization.ToLower(), Organization, nameof(Organization), errorLocaction);
+            FulcrumValidate.AreEqual(Environment.ToLower(), Environment, nameof(Environment), errorLocaction);
         }
     }
 }

@@ -67,8 +67,12 @@ namespace Xlent.Lever.Libraries2.Standard.Error.Model
         string InstanceId { get; }
 
         /// <summary>
-        /// An optional error code for this specific part of the code that reported the error. Will typically
-        /// be a part of the <see cref="MoreInfoUrl"/>.
+        /// An optional hint on where this error occurred in the code. The recommendation is to use the name of the DLL file combined with a fixed GUID for the specific location within the DLL.
+        /// </summary>
+        string ErrorLocation { get; }
+
+        /// <summary>
+        /// An optional error code for the error. A way to use a standard <see cref="Type"/>, but still be more specific. Will typically  be a part of the <see cref="MoreInfoUrl"/>.
         /// </summary>
         string Code { get; }
 

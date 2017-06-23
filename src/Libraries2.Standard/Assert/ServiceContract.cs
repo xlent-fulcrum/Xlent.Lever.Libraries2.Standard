@@ -10,6 +10,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
     /// </summary>
     public static class ServiceContract
     {
+        private static readonly string Namespace = typeof(ServiceContract).Namespace;
         /// <summary>
         /// Verify that <paramref name="expression"/> return true, when applied to <paramref name="parameterValue"/>.
         /// </summary>
@@ -51,7 +52,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             if (parameterValue == null) return;
             try
             {
-                parameterValue.Validate();
+                parameterValue.Validate($"{Namespace}: E1774ECE-78BC-40B4-B9FD-2293BBF4D944");
             }
             catch (FulcrumAssertionFailedException e)
             {
