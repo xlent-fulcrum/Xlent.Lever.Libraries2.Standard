@@ -1,0 +1,31 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Xlent.Lever.Libraries2.Standard</id>
+    <version>0.7.0</version>
+    <authors>XLENT Fulcrum</authors>
+    <projectUrl>https://github.com/xlent-fulcrum/Xlent.Lever.Libraries2.Standard</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <language>en-US</language>
+    <description>Fulcrum library based on .NET Standard.</description>
+    <summary>Fulcrum library based on .NET Standard.</summary>
+    <copyright>Copyright ©2017 Xlent Business Integration AB</copyright>
+    <releaseNotes>
+      0.7.0 Renamed validation contract methods.
+      0.6.6 Missing initialization.
+      0.6 Added classes and interfaces from Authenticate.
+      0.5 Simplified FulcrumAssert.
+      0.3 Added logging. Updated namespaces.
+      0.1 First release.
+    </releaseNotes>
+    <tags>fulcrum lever</tags>
+    <dependencies>
+      <group targetFramework="netstandard1.4">
+        <dependency id="NETStandard.Library" version="1.6.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib\" target="lib" />
+  </files>
+</package>
