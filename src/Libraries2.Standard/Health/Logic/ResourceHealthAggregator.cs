@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Xlent.Lever.Libraries2.Standard.Health.Model;
+using Xlent.Lever.Libraries2.Standard.MultiTenant.Model;
 
 namespace Xlent.Lever.Libraries2.Standard.Health.Logic
 {
@@ -9,6 +10,7 @@ namespace Xlent.Lever.Libraries2.Standard.Health.Logic
     /// </summary>
     public class ResourceHealthAggregator
     {
+        public ITenant Tenant { get; }
         private int _warnings;
         private int _errors;
         private readonly HealthResponse _healthResponse;
@@ -19,14 +21,16 @@ namespace Xlent.Lever.Libraries2.Standard.Health.Logic
         /// The signature for a resource health method.
         /// </summary>
         /// <returns></returns>
-        public delegate Task<HealthResponse> GetResourceHealthDelegate();
+        public delegate Task<HealthResponse> GetResourceHealthDelegate(ITenant tenant);
 
         /// <summary>
         /// Constructor.
         /// </summary>
+        /// <param name="tenant">The tenant that we should focus on.</param>
         /// <param name="resourceName">The name of the resource.</param>
-        public ResourceHealthAggregator(string resourceName)
+        public ResourceHealthAggregator(ITenant tenant, string resourceName)
         {
+            Tenant = tenant;
             _healthResponse = new HealthResponse(resourceName);
         }
 
@@ -50,7 +54,7 @@ namespace Xlent.Lever.Libraries2.Standard.Health.Logic
             HealthResponse response;
             try
             {
-                response = await healthDelegate();
+                response = await healthDelegate(Tenant);
                 if (string.IsNullOrWhiteSpace(response.Resource)) response.Resource = resourceName;
             }
             catch (Exception e)
