@@ -136,6 +136,58 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             ThrowException(errorLocation, customMessage ?? $"Expected '{expression.Body}' ({actualValue}) to be equal to ({expectedValue}).");
         }
 
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is less than to <paramref name="greaterValue"/>.
+        /// </summary>
+        public static void IsLessThan<T>(T greaterValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(greaterValue, nameof(greaterValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected ({actualValue}) to be less than ({greaterValue}).";
+            IsTrue(actualValue.CompareTo(greaterValue) < 0, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is less than or equal to <paramref name="greaterOrEqualValue"/>.
+        /// </summary>
+        public static void IsLessThanOrEqualTo<T>(T greaterOrEqualValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(greaterOrEqualValue, nameof(greaterOrEqualValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected ({actualValue}) to be less or equal to ({greaterOrEqualValue}).";
+            IsTrue(actualValue.CompareTo(greaterOrEqualValue) <= 0, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is greater than <paramref name="lesserValue"/>.
+        /// </summary>
+        public static void IsGreaterThan<T>(T lesserValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(lesserValue, nameof(lesserValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected ({actualValue}) to be greater than ({lesserValue}).";
+            IsTrue(actualValue.CompareTo(lesserValue) > 0, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is greater than or equal to <paramref name="lesserOrEqualValue"/>.
+        /// </summary>
+        public static void IsGreaterThanOrEqualTo<T>(T lesserOrEqualValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(lesserOrEqualValue, nameof(lesserOrEqualValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected ({actualValue}) to be greater than or equal to ({lesserOrEqualValue}).";
+            IsTrue(actualValue.CompareTo(lesserOrEqualValue) >= 0, errorLocation, message);
+        }
+
         private static void ThrowException(string errorLocation, string message)
         {
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));

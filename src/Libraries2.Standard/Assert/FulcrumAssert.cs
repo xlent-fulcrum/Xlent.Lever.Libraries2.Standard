@@ -75,5 +75,53 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
             GenericAssert<FulcrumAssertionFailedException>.AreEqual(expectedValue, actualValue, errorLocation, customMessage);
         }
+
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is less than to <paramref name="greaterValue"/>.
+        /// </summary>
+        public static void IsLessThan<T>(T greaterValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(greaterValue, nameof(greaterValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericAssert<FulcrumAssertionFailedException>.IsLessThan(greaterValue, actualValue, errorLocation, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is less than or equal to <paramref name="greaterOrEqualValue"/>.
+        /// </summary>
+        public static void IsLessThanOrEqualTo<T>(T greaterOrEqualValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(greaterOrEqualValue, nameof(greaterOrEqualValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericAssert<FulcrumAssertionFailedException>.IsLessThanOrEqualTo(greaterOrEqualValue, actualValue, errorLocation, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is greater than <paramref name="lesserValue"/>.
+        /// </summary>
+        public static void IsGreaterThan<T>(T lesserValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(lesserValue, nameof(lesserValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericAssert<FulcrumAssertionFailedException>.IsGreaterThan(lesserValue, actualValue, errorLocation, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="actualValue"/> is greater than or equal to <paramref name="lesserOrEqualValue"/>.
+        /// </summary>
+        public static void IsGreaterThanOrEqualTo<T>(T lesserOrEqualValue, T actualValue, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(lesserOrEqualValue, nameof(lesserOrEqualValue));
+            InternalContract.RequireNotNull(actualValue, nameof(actualValue));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericAssert<FulcrumAssertionFailedException>.IsLessThanOrEqualTo(lesserOrEqualValue, actualValue, errorLocation, customMessage);
+        }
     }
 }

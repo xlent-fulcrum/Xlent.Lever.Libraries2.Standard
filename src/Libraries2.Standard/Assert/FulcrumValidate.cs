@@ -1,4 +1,5 @@
-﻿using Xlent.Lever.Libraries2.Standard.Error;
+﻿using System;
+using Xlent.Lever.Libraries2.Standard.Error;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
 
 namespace Xlent.Lever.Libraries2.Standard.Assert
@@ -75,6 +76,30 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(propertyName, nameof(propertyName));
             var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be equal to ({expectedValue}).";
             GenericAssert<FulcrumAssertionFailedException>.AreEqual(expectedValue, propertyValue, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="propertyValue"/> is equal to <paramref name="expectedValue"/>.
+        /// </summary>
+        public static void IsLessThan<T>(T greaterValue, T propertyValue, string propertyName, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            InternalContract.RequireNotNull(propertyName, nameof(propertyName));
+            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be less than ({greaterValue}).";
+            GenericAssert<FulcrumAssertionFailedException>.IsLessThan(greaterValue, propertyValue, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="propertyValue"/> is equal to <paramref name="expectedValue"/>.
+        /// </summary>
+        public static void IsLessThanOrEqualTo<T>(T greaterValue, T propertyValue, string propertyName, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            InternalContract.RequireNotNull(propertyName, nameof(propertyName));
+            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be less than ({greaterValue}).";
+            GenericAssert<FulcrumAssertionFailedException>.IsLessThanOrEqualTo(greaterValue, propertyValue, errorLocation, message);
         }
     }
 }
