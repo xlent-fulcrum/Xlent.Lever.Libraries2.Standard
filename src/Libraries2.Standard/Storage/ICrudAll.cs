@@ -19,7 +19,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage
         /// </summary>
         /// <returns>The found object.</returns>
         /// <exception cref="FulcrumNotFoundException">Thrown if the <paramref name="id"/> could not be found.</exception>
-        Task<TStorable> ReadAllAsync(TId id, int );
+        Task<TStorable> ReadAllAsync(TId id, int offset = 0, int limit = PageInfo.DefaultLimit);
 
         /// <summary>
         /// Update a "row" in storage.

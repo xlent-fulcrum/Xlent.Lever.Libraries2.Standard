@@ -79,7 +79,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
-        /// Verify that <paramref name="propertyValue"/> is equal to <paramref name="expectedValue"/>.
+        /// Verify that <paramref name="propertyValue"/> is less than <paramref name="greaterValue"/>.
         /// </summary>
         public static void IsLessThan<T>(T greaterValue, T propertyValue, string propertyName, string errorLocation, string customMessage = null)
             where T : IComparable<T>
@@ -91,15 +91,39 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
-        /// Verify that <paramref name="propertyValue"/> is equal to <paramref name="expectedValue"/>.
+        /// Verify that <paramref name="propertyValue"/> is less than or equal to <paramref name="greaterOrEqualValue"/>.
         /// </summary>
-        public static void IsLessThanOrEqualTo<T>(T greaterValue, T propertyValue, string propertyName, string errorLocation, string customMessage = null)
+        public static void IsLessThanOrEqualTo<T>(T greaterOrEqualValue, T propertyValue, string propertyName, string errorLocation, string customMessage = null)
             where T : IComparable<T>
         {
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
             InternalContract.RequireNotNull(propertyName, nameof(propertyName));
-            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be less than ({greaterValue}).";
-            GenericAssert<FulcrumAssertionFailedException>.IsLessThanOrEqualTo(greaterValue, propertyValue, errorLocation, message);
+            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be less than ({greaterOrEqualValue}).";
+            GenericAssert<FulcrumAssertionFailedException>.IsLessThanOrEqualTo(greaterOrEqualValue, propertyValue, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="propertyValue"/> is greater than <paramref name="lesserValue"/>.
+        /// </summary>
+        public static void IsGreaterThan<T>(T lesserValue, T propertyValue, string propertyName, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            InternalContract.RequireNotNull(propertyName, nameof(propertyName));
+            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be less than ({lesserValue}).";
+            GenericAssert<FulcrumAssertionFailedException>.IsGreaterThan(lesserValue, propertyValue, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="propertyValue"/> is greater than or equal to <paramref name="lesserOrEqualValue"/>.
+        /// </summary>
+        public static void IsGreaterThanOrEqualTo<T>(T lesserOrEqualValue, T propertyValue, string propertyName, string errorLocation, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            InternalContract.RequireNotNull(propertyName, nameof(propertyName));
+            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be less than ({lesserOrEqualValue}).";
+            GenericAssert<FulcrumAssertionFailedException>.IsGreaterThanOrEqualTo(lesserOrEqualValue, propertyValue, errorLocation, message);
         }
     }
 }
