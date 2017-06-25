@@ -123,5 +123,22 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
             GenericAssert<FulcrumAssertionFailedException>.IsLessThanOrEqualTo(lesserOrEqualValue, actualValue, errorLocation, customMessage);
         }
+
+        /// <summary>
+        /// If <paramref name="value"/> is not null, then call the FulcrumValidate() method of that type.
+        /// </summary>
+        public static void IsValidatedOrNull(IValidatable value, string errorLocation, string customMessage = null)
+        {
+            value?.Validate(errorLocation);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="value"/> is not null and also call the FulcrumValidate() method of that type.
+        /// </summary>
+        public static void IsValidatedAndNotNull(IValidatable value, string errorLocation, string customMessage = null)
+        {
+            IsNotNull(value, errorLocation);
+            IsValidatedOrNull(value, errorLocation, customMessage);
+        }
     }
 }

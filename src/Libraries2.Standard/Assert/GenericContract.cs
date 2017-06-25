@@ -75,6 +75,58 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             ThrowException(message);
         }
 
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is less than to <paramref name="greaterValue"/>.
+        /// </summary>
+        public static void RequireLessThan<T>(T greaterValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(greaterValue, nameof(greaterValue));
+            InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
+            InternalContract.RequireNotNull(parameterName, nameof(parameterName));
+            var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must be less than ({greaterValue}).";
+            Require(parameterValue.CompareTo(greaterValue) < 0, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is less than or equal to <paramref name="greaterOrEqualValue"/>.
+        /// </summary>
+        public static void RequireLessThanOrEqualTo<T>(T greaterOrEqualValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(greaterOrEqualValue, nameof(greaterOrEqualValue));
+            InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
+            InternalContract.RequireNotNull(parameterName, nameof(parameterName));
+            var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must be less than or equal to ({greaterOrEqualValue}).";
+            Require(parameterValue.CompareTo(greaterOrEqualValue) <= 0, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is greater than <paramref name="lesserValue"/>.
+        /// </summary>
+        public static void RequireGreaterThan<T>(T lesserValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(lesserValue, nameof(lesserValue));
+            InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
+            InternalContract.RequireNotNull(parameterName, nameof(parameterName));
+            var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must be greater than ({lesserValue}).";
+            Require(parameterValue.CompareTo(lesserValue) < 0, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is greater than or equal to <paramref name="lesserOrEqualValue"/>.
+        /// </summary>
+        public static void RequireGreaterThanOrEqualTo<T>(T lesserOrEqualValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            InternalContract.RequireNotNull(lesserOrEqualValue, nameof(lesserOrEqualValue));
+            InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
+            InternalContract.RequireNotNull(parameterName, nameof(parameterName));
+            var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must be greater than or equal to ({lesserOrEqualValue}).";
+            Require(parameterValue.CompareTo(lesserOrEqualValue) <= 0, message);
+        }
+
         private static string GetErrorMessageIfFalse<T>(T parameterValue, Expression<Func<T, bool>> requirementExpression, string parameterName)
         {
             if (requirementExpression.Compile()(parameterValue)) return null;

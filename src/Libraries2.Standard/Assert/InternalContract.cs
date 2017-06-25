@@ -54,7 +54,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             {
                 parameterValue.Validate($"{Namespace}: FA88DA6F-8EA4-414F-86EE-34F4B7A14E40");
             }
-            catch (FulcrumAssertionFailedException e)
+            catch (FulcrumContractException e)
             {
                 throw new FulcrumContractException($"Validation failed for {parameterName}: {e.Message}", e);
             }
@@ -83,6 +83,54 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         public static void Require(bool mustBeTrue, string customMessage = null)
         {
             GenericContract<FulcrumContractException>.Require(mustBeTrue, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is less than to <paramref name="greaterValue"/>.
+        /// </summary>
+        public static void RequireLessThan<T>(T greaterValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            RequireNotNull(greaterValue, nameof(greaterValue));
+            RequireNotNull(parameterValue, nameof(parameterValue));
+            RequireNotNull(parameterName, nameof(parameterName));
+            GenericContract<FulcrumContractException>.RequireLessThan(greaterValue, parameterValue, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is less than or equal to <paramref name="greaterOrEqualValue"/>.
+        /// </summary>
+        public static void RequireLessThanOrEqualTo<T>(T greaterOrEqualValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            RequireNotNull(greaterOrEqualValue, nameof(greaterOrEqualValue));
+            RequireNotNull(parameterValue, nameof(parameterValue));
+            RequireNotNull(parameterName, nameof(parameterName));
+            GenericContract<FulcrumContractException>.RequireLessThanOrEqualTo(greaterOrEqualValue, parameterValue, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is greater than <paramref name="lesserValue"/>.
+        /// </summary>
+        public static void RequireGreaterThan<T>(T lesserValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            RequireNotNull(lesserValue, nameof(lesserValue));
+            RequireNotNull(parameterValue, nameof(parameterValue));
+            RequireNotNull(parameterName, nameof(parameterName));
+            GenericContract<FulcrumContractException>.RequireGreaterThan(lesserValue, parameterValue, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is greater than or equal to <paramref name="lesserOrEqualValue"/>.
+        /// </summary>
+        public static void RequireGreaterThanOrEqualTo<T>(T lesserOrEqualValue, T parameterValue, string parameterName, string customMessage = null)
+            where T : IComparable<T>
+        {
+            RequireNotNull(lesserOrEqualValue, nameof(lesserOrEqualValue));
+            RequireNotNull(parameterValue, nameof(parameterValue));
+            RequireNotNull(parameterName, nameof(parameterName));
+            GenericContract<FulcrumContractException>.RequireLessThanOrEqualTo(lesserOrEqualValue, parameterValue, parameterName, customMessage);
         }
 
         /// <summary>

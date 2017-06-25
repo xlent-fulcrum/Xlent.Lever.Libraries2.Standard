@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Xlent.Lever.Libraries2.Standard</id>
-    <version>0.9.7</version>
+    <version>0.9.11</version>
     <authors>XLENT Fulcrum</authors>
     <projectUrl>https://github.com/xlent-fulcrum/Xlent.Lever.Libraries2.Standard</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,8 +11,8 @@
     <summary>Fulcrum library based on .NET Standard.</summary>
     <copyright>Copyright ©2017 Xlent Business Integration AB</copyright>
     <releaseNotes>
-      0.9.7 Added interfaces for storage and new assertions. 
-      0.9.3 New signature for GetResourceHealthAsync(). Added Storage interfaces.
+      0.9.11 Added interfaces for storage and new assertions. 
+      0.9.3 New signature for GetResourceHealthAsync().
       0.8.2 Assertions now require a errorLocaction argument.
       0.7.0 Renamed validation contract methods.
       0.6.6 Missing initialization.
