@@ -12,85 +12,43 @@ namespace Xlent.Lever.Libraries2.Standard.Error.Model
     /// </remarks>
     public class FulcrumError : IFulcrumError
     {
-        /// <summary>
-        /// Mandatory technical information that a developer calling your REST API might find useful.
-        /// This is where you might include exception messages, stack traces, or anything else that you
-        /// think will help a developer.
-        /// </summary>
-        /// <remarks>
-        /// This message is not expected to contain any of the codes or identifiers that are already contained
-        /// in this error type, sucha as the error <see cref="Code"/> or the <see cref="InstanceId"/>.
-        /// </remarks>
+        /// <inheritdoc />
         public string TechnicalMessage { get; set; }
 
-        /// <summary>
-        /// An optional human readable error message that can potentially be shown directly to an application
-        /// end user (not a developer). It should be friendly and easy to understand and convey a concise
-        /// reason as to why the error occurred.  It should probaby not contain technical information. 
-        /// </summary>
+        /// <inheritdoc />
         public string FriendlyMessage { get; set; }
 
-        /// <summary>
-        /// An optional URL that anyone seeing the error message can click (or copy and paste) in a browser.
-        /// The target web page should describe the error condition fully, as well as potential solutions
-        /// to help them resolve the error condition.
-        /// </summary>
+        /// <inheritdoc />
         public string MoreInfoUrl { get; set; }
 
-        /// <summary>
-        /// Mandatory indication for if it would be meaningful to try sending the request again.
-        /// </summary>
+        /// <inheritdoc />
         public bool IsRetryMeaningful { get; set; }
 
-        /// <summary>
-        /// If <see cref="IsRetryMeaningful"/> is true, then this optional property can give a recommended
-        /// interval to wait before the request is sent again. A value less or equal to 0.0 means that
-        /// no recommendation was given.
-        /// </summary>
+        /// <inheritdoc />
         public double RecommendedWaitTimeInSeconds { get; set; }
 
-        /// <summary>
-        /// An optional technical name for the server that created this error information.
-        /// </summary>
-        /// <remarks>
-        /// Useful when for a call that is "deep", i.e. the call was relayed to another server.
-        /// </remarks>
+        /// <inheritdoc />
         public string ServerTechnicalName { get; set; }
 
-        /// <summary>
-        /// A mandatory unique identifier for this particular instance of the error. Ideally, the same identifier
-        /// should not be used ever again. The recommendation is to use a newly created GUID.
-        /// </summary>
+        /// <inheritdoc />
         public string InstanceId { get; set; }
 
-        /// <summary>
-        /// An optional error code for this specific part of the code that reported the error. Will typically
-        /// be a part of the <see cref="MoreInfoUrl"/>.
-        /// </summary>
+        /// <inheritdoc />
+        public string ErrorLocation { get; set; }
+
+        /// <inheritdoc />
         public string Code { get; set; }
 
-        /// <summary>
-        /// Errors are grouped into different types, such as "BusinessRule", "NotFound", "Unavailable".
-        /// Type is a mandatory unique id for the type of error. The recommendation is to use a constant GUID.
-        /// </summary>
+        /// <inheritdoc />
         public string Type { get; set; }
 
-        /// <summary>
-        /// All calls that were involved in the chain that led to this error (successful calls or not) will
-        /// all be marked in the logs with this mandatory CorrelationId. It is valuable if someone wants to track down
-        /// exactly what happened.
-        /// </summary>
+        /// <inheritdoc />
         public string CorrelationId { get; set; }
 
-        /// <summary>
-        /// An optional unique id for the format string for the <see cref="FriendlyMessage"/>. The intentation is that
-        /// it can be used for translating the message. Recommended to be a constant GUID.
-        /// </summary>
+        /// <inheritdoc />
         public string FriendlyMessageId { get; set; }
 
-        /// <summary>
-        /// An optional error that was the cause of this error.
-        /// </summary>
+        /// <inheritdoc />
         public FulcrumError InnerError { get; set; }
 
         /// <inheritdoc />
@@ -104,6 +62,7 @@ namespace Xlent.Lever.Libraries2.Standard.Error.Model
             ServerTechnicalName = fulcrumError.ServerTechnicalName;
             InstanceId = fulcrumError.InstanceId;
             Code = fulcrumError.Code;
+            ErrorLocation = fulcrumError.ErrorLocation;
             Type = fulcrumError.Type;
             CorrelationId = fulcrumError.CorrelationId;
         }
@@ -115,11 +74,11 @@ namespace Xlent.Lever.Libraries2.Standard.Error.Model
         }
 
         /// <inheritdoc />
-        public virtual void Validate()
+        public virtual void Validate(string errorLocaction)
         {
-            FulcrumValidate.IsNotNullOrWhiteSpace(TechnicalMessage, nameof(TechnicalMessage));
-            FulcrumValidate.IsNotNullOrWhiteSpace(Type, nameof(Type));
-            FulcrumValidate.IsNotNullOrWhiteSpace(InstanceId, nameof(InstanceId));
+            FulcrumValidate.IsNotNullOrWhiteSpace(TechnicalMessage, nameof(TechnicalMessage), errorLocaction);
+            FulcrumValidate.IsNotNullOrWhiteSpace(Type, nameof(Type), errorLocaction);
+            FulcrumValidate.IsNotNullOrWhiteSpace(InstanceId, nameof(InstanceId), errorLocaction);
         }
     }
 }

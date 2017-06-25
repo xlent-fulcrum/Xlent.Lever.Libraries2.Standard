@@ -11,8 +11,8 @@
     <DocumentationFile>bin\Debug\netstandard1.4\Xlent.Lever.Libraries2.Standard.xml</DocumentationFile>
   </PropertyGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="rd /s /q $(ProjectDir)lib\$(ProjectName)" />
-    <Exec Command="mkdir $(ProjectDir)lib\$(ProjectName)\" />
-    <Exec Command="copy $(OutDir)Xlent.Lever.Libraries2.Standard.* $(ProjectDir)\lib\$(ProjectName)\" />
+    <Exec Command="rd /s /q $(ProjectDir)lib\" />
+    <Exec Command="mkdir $(ProjectDir)lib\netstandard1.4\" />
+    <Exec Command="copy $(OutDir)Xlent.Lever.Libraries2.Standard.* $(ProjectDir)\lib\netstandard1.4\" />
   </Target>
 </Project>

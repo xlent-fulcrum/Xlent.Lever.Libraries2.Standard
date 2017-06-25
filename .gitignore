@@ -257,3 +257,5 @@ lib/Libraries2.Standard/*.json
 lib/Libraries2.Standard/*.xml
 /src/Libraries2.Standard/lib/Libraries2.Standard/*.json
 /src/Libraries2.Standard/lib/Libraries2.Standard/*.xml
+/src/Libraries2.Standard/lib/netstandard1.4/*.json
+/src/Libraries2.Standard/lib/netstandard1.4/*.xml

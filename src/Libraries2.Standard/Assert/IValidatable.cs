@@ -12,6 +12,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// FulcrumValidate that the properties are OK. The validation should be made with methods from the <see cref="Validate"/> class.
         /// </summary>
         /// <exception cref="FulcrumAssertionFailedException">A validation failed.</exception>
-        void Validate();
+        /// <param name="errorLocaction">A unique errorLocaction for the part of errorLocaction where the validation check was made.</param>
+        void Validate(string errorLocaction);
     }
 }
