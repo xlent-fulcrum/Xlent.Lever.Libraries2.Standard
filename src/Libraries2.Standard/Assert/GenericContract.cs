@@ -111,7 +111,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
             InternalContract.RequireNotNull(parameterName, nameof(parameterName));
             var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must be greater than ({lesserValue}).";
-            Require(parameterValue.CompareTo(lesserValue) < 0, message);
+            Require(parameterValue.CompareTo(lesserValue) > 0, message);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
             InternalContract.RequireNotNull(parameterName, nameof(parameterName));
             var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must be greater than or equal to ({lesserOrEqualValue}).";
-            Require(parameterValue.CompareTo(lesserOrEqualValue) <= 0, message);
+            Require(parameterValue.CompareTo(lesserOrEqualValue) >= 0, message);
         }
 
         private static string GetErrorMessageIfFalse<T>(T parameterValue, Expression<Func<T, bool>> requirementExpression, string parameterName)

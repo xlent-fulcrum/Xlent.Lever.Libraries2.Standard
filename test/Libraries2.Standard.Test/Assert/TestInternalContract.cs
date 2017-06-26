@@ -194,5 +194,141 @@ namespace Libraries2.Standard.Test.Assert
                 UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
+
+        #region Less Than Greater Than
+
+        [TestMethod]
+        public void LessThanFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireLessThan(1, 1, parameterName);
+                UT.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumContractException fulcrumException)
+            {
+                UT.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void LessThanOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireLessThan(10, 1, parameterName);
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        [TestMethod]
+        public void LessThanOrEqualFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireLessThanOrEqualTo(1, 2, parameterName);
+                UT.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumContractException fulcrumException)
+            {
+                UT.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void LessThanOrEqualOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireLessThanOrEqualTo(1, 1, parameterName);
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireGreaterThan(1, 1, parameterName);
+                UT.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumContractException fulcrumException)
+            {
+                UT.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireGreaterThan(1, 2, parameterName);
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanOrEqualFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireGreaterThanOrEqualTo(1, 2, parameterName);
+                UT.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumContractException fulcrumException)
+            {
+                UT.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanOrEqualOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                InternalContract.RequireGreaterThanOrEqualTo(1, 1, parameterName);
+            }
+            catch (Exception e)
+            {
+                UT.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        #endregion
     }
 }

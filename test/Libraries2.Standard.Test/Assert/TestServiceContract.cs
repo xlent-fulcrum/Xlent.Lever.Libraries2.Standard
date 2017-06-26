@@ -193,5 +193,141 @@ namespace Libraries2.Standard.Test.Assert
                 Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
+
+        #region Less Than Greater Than
+
+        [TestMethod]
+        public void LessThanFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireLessThan(1, 1, parameterName);
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumServiceContractException fulcrumException)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void LessThanOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireLessThan(10, 1, parameterName);
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        [TestMethod]
+        public void LessThanOrEqualFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireLessThanOrEqualTo(1, 2, parameterName);
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumServiceContractException fulcrumException)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void LessThanOrEqualOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireLessThanOrEqualTo(1, 1, parameterName);
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireGreaterThan(1, 1, parameterName);
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumServiceContractException fulcrumException)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireGreaterThan(1, 2, parameterName);
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanOrEqualFail()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireGreaterThanOrEqualTo(1, 2, parameterName);
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumServiceContractException fulcrumException)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanOrEqualOk()
+        {
+            const string parameterName = "parameterName";
+            try
+            {
+                ServiceContract.RequireGreaterThanOrEqualTo(1, 1, parameterName);
+            }
+            catch (Exception e)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+            }
+        }
+
+        #endregion
     }
 }

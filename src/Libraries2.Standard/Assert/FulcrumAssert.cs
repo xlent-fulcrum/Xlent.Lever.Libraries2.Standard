@@ -19,7 +19,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         {
             InternalContract.RequireNotNullOrWhitespace(message, nameof(message));
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
-            GenericAssert<FulcrumAssertionFailedException>.Fail(message, errorLocation);
+            GenericAssert<FulcrumAssertionFailedException>.Fail(errorLocation, message);
         }
 
         /// <summary>
