@@ -10,6 +10,9 @@ namespace Xlent.Lever.Libraries2.Standard.Health.Logic
     /// </summary>
     public class ResourceHealthAggregator
     {
+        /// <summary>
+        /// The current Tenant
+        /// </summary>
         public ITenant Tenant { get; }
         private int _warnings;
         private int _errors;

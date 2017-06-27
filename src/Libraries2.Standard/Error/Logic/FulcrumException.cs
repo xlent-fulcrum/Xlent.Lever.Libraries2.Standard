@@ -40,7 +40,6 @@ namespace Xlent.Lever.Libraries2.Standard.Error.Logic
         public virtual bool IsRetryMeaningful { get; internal set; }
 
         /// <inheritdoc />
-        /// </summary>
         public double RecommendedWaitTimeInSeconds { get; set; }
 
         /// <inheritdoc />

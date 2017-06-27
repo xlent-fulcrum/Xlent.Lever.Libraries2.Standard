@@ -121,7 +121,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             if (parameterValues == null) return;
             foreach (var parameterValue in parameterValues)
             {
-                RequireValidatedOrNull(parameterValue, parameterName, customMessage);
+                RequireValidated(parameterValue, parameterName, customMessage);
             }
         }
 
