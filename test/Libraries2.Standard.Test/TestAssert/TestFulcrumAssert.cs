@@ -2,9 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xlent.Lever.Libraries2.Standard.Assert;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
-using UT = Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Libraries2.Standard.Test.Assert
+namespace Libraries2.Standard.Test.TestAssert
 {
     [TestClass]
     public class TestFulcrumAssert
@@ -18,15 +17,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 FulcrumAssert.Fail($"{Namespace}: D978C43E-D131-4663-A74A-FDF3EA4ED526", message);
-              UT.Assert.Fail("An exception should have been thrown");
+              Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumAssertionFailedException fulcrumException)
             {
-               UT.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
+               Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -43,15 +42,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 FulcrumAssert.IsTrue(false, $"{Namespace}: D6945A7A-7ACF-44D8-89B1-4989D721CB22", message);
-                UT.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumAssertionFailedException fulcrumException)
             {
-                UT.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -68,15 +67,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 FulcrumAssert.IsNotNull(null, $"{Namespace}: 095DD6FC-BC21-42AF-8FDC-7AFEB391D9F6", message);
-                UT.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumAssertionFailedException fulcrumException)
             {
-                UT.Assert.IsNotNull(fulcrumException.TechnicalMessage.Contains(message));
+                Assert.IsNotNull(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -93,15 +92,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 FulcrumAssert.IsNotNullOrWhiteSpace("  ", $"{Namespace}: B46B96EA-2919-4872-826D-967930DFA2B5", message);
-                UT.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumAssertionFailedException fulcrumException)
             {
-                UT.Assert.IsNotNull(fulcrumException.TechnicalMessage.Contains(message));
+                Assert.IsNotNull(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -118,15 +117,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 FulcrumAssert.AreEqual("Knoll", "Tott", $"{Namespace}: 0F718BCF-B831-40D7-A172-8A4293F58EF6");
-                UT.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumAssertionFailedException fulcrumException)
             {
-                UT.Assert.IsNotNull(fulcrumException.TechnicalMessage.Contains(message));
+                Assert.IsNotNull(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                UT.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 

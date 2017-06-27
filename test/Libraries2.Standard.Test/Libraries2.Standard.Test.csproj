@@ -48,11 +48,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assert\TestInternalContract.cs" />
+    <Compile Include="LooseCoupling\TestConceptValue.cs" />
+    <Compile Include="TestAssert\TestInternalContract.cs" />
     <Compile Include="Context\TestAsyncLocalValueProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Assert\TestFulcrumAssert.cs" />
-    <Compile Include="Assert\TestServiceContract.cs" />
+    <Compile Include="TestAssert\TestFulcrumAssert.cs" />
+    <Compile Include="TestAssert\TestServiceContract.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

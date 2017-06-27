@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xlent.Lever.Libraries2.Standard.Assert;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
 
-namespace Libraries2.Standard.Test.Assert
+namespace Libraries2.Standard.Test.TestAssert
 {
     [TestClass]
     public class TestServiceContract
@@ -17,15 +17,15 @@ namespace Libraries2.Standard.Test.Assert
                 object nullObject = null;
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.RequireNotNull(nullObject, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -38,15 +38,15 @@ namespace Libraries2.Standard.Test.Assert
                 string nullString = null;
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.RequireNotNullOrWhitespace(nullString, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -59,15 +59,15 @@ namespace Libraries2.Standard.Test.Assert
                 string emptyString = "";
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.RequireNotNullOrWhitespace(emptyString, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -80,15 +80,15 @@ namespace Libraries2.Standard.Test.Assert
                 string whitespaceString = "     \t";
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.RequireNotNullOrWhitespace(whitespaceString, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -100,15 +100,15 @@ namespace Libraries2.Standard.Test.Assert
             {
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.Fail(message);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -120,15 +120,15 @@ namespace Libraries2.Standard.Test.Assert
             {
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.Require(false, message);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -140,15 +140,15 @@ namespace Libraries2.Standard.Test.Assert
             {
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.Require(() => false, message);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -161,15 +161,15 @@ namespace Libraries2.Standard.Test.Assert
                 const int value = 23;
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.Require(value, x => x != 23, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -182,15 +182,15 @@ namespace Libraries2.Standard.Test.Assert
                 const int value = 0;
                 // ReSharper disable once ExpressionIsAlwaysNull
                 ServiceContract.RequireNotDefaultValue(value, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -203,15 +203,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 ServiceContract.RequireLessThan(1, 1, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -225,7 +225,7 @@ namespace Libraries2.Standard.Test.Assert
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+                Assert.Fail($"Expected no exception but got {e.Message}.");
             }
         }
 
@@ -236,15 +236,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 ServiceContract.RequireLessThanOrEqualTo(1, 2, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -258,7 +258,7 @@ namespace Libraries2.Standard.Test.Assert
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+                Assert.Fail($"Expected no exception but got {e.Message}.");
             }
         }
 
@@ -269,15 +269,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 ServiceContract.RequireGreaterThan(1, 1, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -291,7 +291,7 @@ namespace Libraries2.Standard.Test.Assert
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+                Assert.Fail($"Expected no exception but got {e.Message}.");
             }
         }
 
@@ -302,15 +302,15 @@ namespace Libraries2.Standard.Test.Assert
             try
             {
                 ServiceContract.RequireGreaterThanOrEqualTo(1, 2, parameterName);
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("An exception should have been thrown");
+                Assert.Fail("An exception should have been thrown");
             }
             catch (FulcrumServiceContractException fulcrumException)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
             }
         }
 
@@ -324,7 +324,7 @@ namespace Libraries2.Standard.Test.Assert
             }
             catch (Exception e)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail($"Expected no exception but got {e.Message}.");
+                Assert.Fail($"Expected no exception but got {e.Message}.");
             }
         }
 
