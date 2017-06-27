@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq.Expressions;
-using Xlent.Lever.Libraries2.Standard.Error;
+using System.Collections.Generic;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
 
 namespace Xlent.Lever.Libraries2.Standard.Assert
@@ -125,20 +124,65 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
-        /// If <paramref name="value"/> is not null, then call the FulcrumValidate() method of that type.
+        /// If <paramref name="value"/> is not null, then call the Validate() method of that type.
         /// </summary>
-        public static void IsValidatedOrNull(IValidatable value, string errorLocation, string customMessage = null)
+        [Obsolete("Use the IsValidated() method.")]
+        public static void IsValidatedOrNull(IValidatable value, string errorLocation)
         {
             value?.Validate(errorLocation);
         }
 
         /// <summary>
-        /// Verify that <paramref name="value"/> is not null and also call the FulcrumValidate() method of that type.
+        /// If <paramref name="values"/> is not null, then call the Validate() method for every object in the collection.
         /// </summary>
-        public static void IsValidatedAndNotNull(IValidatable value, string errorLocation, string customMessage = null)
+        [Obsolete("Use the IsValidated() method.")]
+        public static void IsValidatedOrNull(IEnumerable<IValidatable> values, string errorLocation)
+        {
+            if (values == null) return;
+            foreach (var value in values)
+            {
+                value?.Validate(errorLocation);
+            }
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="value"/> is not null and also call the Validate() method of that type.
+        /// </summary>
+        [Obsolete("Use the IsValidated() method.")]
+        public static void IsValidatedAndNotNull(IValidatable value, string errorLocation)
         {
             IsNotNull(value, errorLocation);
-            IsValidatedOrNull(value, errorLocation, customMessage);
+            IsValidatedOrNull(value, errorLocation);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="values"/> is not null and also call the Validate() method for every object in the collection.
+        /// </summary>
+        [Obsolete("Use the IsValidated() method.")]
+        public static void IsValidatedAndNotNull(IEnumerable<IValidatable> values, string errorLocation)
+        {
+            IsNotNull(values, errorLocation);
+            IsValidatedOrNull(values, errorLocation);
+        }
+
+        /// <summary>
+        /// Call the Validate() method for <paramref name="value"/>
+        /// </summary>
+        public static void IsValidated(IValidatable value, string errorLocation)
+        {
+            value?.Validate(errorLocation);
+        }
+
+        /// <summary>
+        /// Call the Validate() method for each item in <paramref name="values"/>
+        /// </summary>
+        public static void IsValidated(IEnumerable<IValidatable> values, string errorLocation)
+        {
+            if (values == null) return;
+            foreach (var value in values)
+            {
+                IsValidated(value, errorLocation);
+            }
         }
     }
 }

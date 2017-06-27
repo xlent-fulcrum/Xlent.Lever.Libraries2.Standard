@@ -50,12 +50,12 @@ namespace Xlent.Lever.Libraries2.Standard.MultiTenant.Model
         }
 
         /// <inheritdoc />
-        public void Validate(string errorLocaction)
+        public void Validate(string errorLocation, string propertyPath = "")
         {
-            FulcrumValidate.IsNotNullOrWhiteSpace(Organization, nameof(Organization), errorLocaction);
-            FulcrumValidate.IsNotNullOrWhiteSpace(Environment, nameof(Environment), errorLocaction);
-            FulcrumValidate.AreEqual(Organization.ToLower(), Organization, nameof(Organization), errorLocaction);
-            FulcrumValidate.AreEqual(Environment.ToLower(), Environment, nameof(Environment), errorLocaction);
+            FulcrumValidate.IsNotNullOrWhiteSpace(Organization, nameof(Organization), errorLocation);
+            FulcrumValidate.IsNotNullOrWhiteSpace(Environment, nameof(Environment), errorLocation);
+            FulcrumValidate.AreEqual(Organization.ToLower(), Organization, nameof(Organization), errorLocation);
+            FulcrumValidate.AreEqual(Environment.ToLower(), Environment, nameof(Environment), errorLocation);
         }
     }
 }

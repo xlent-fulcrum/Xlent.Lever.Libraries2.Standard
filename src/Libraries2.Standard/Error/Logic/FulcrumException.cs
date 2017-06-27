@@ -120,11 +120,11 @@ namespace Xlent.Lever.Libraries2.Standard.Error.Logic
         }
 
         /// <inheritdoc />
-        public virtual void Validate(string errorLocaction)
+        public virtual void Validate(string errorLocation, string propertyPath = "")
         {
-            FulcrumValidate.IsNotNullOrWhiteSpace(TechnicalMessage, nameof(TechnicalMessage), errorLocaction);
-            FulcrumValidate.IsNotNullOrWhiteSpace(Type, nameof(Type), errorLocaction);
-            FulcrumValidate.IsNotNullOrWhiteSpace(InstanceId, nameof(InstanceId), errorLocaction);
+            FulcrumValidate.IsNotNullOrWhiteSpace(TechnicalMessage, nameof(TechnicalMessage), errorLocation);
+            FulcrumValidate.IsNotNullOrWhiteSpace(Type, nameof(Type), errorLocation);
+            FulcrumValidate.IsNotNullOrWhiteSpace(InstanceId, nameof(InstanceId), errorLocation);
         }
     }
 }

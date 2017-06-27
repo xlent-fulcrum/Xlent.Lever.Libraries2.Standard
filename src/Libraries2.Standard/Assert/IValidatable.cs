@@ -1,5 +1,4 @@
-﻿using Xlent.Lever.Libraries2.Standard.Error;
-using Xlent.Lever.Libraries2.Standard.Error.Logic;
+﻿using Xlent.Lever.Libraries2.Standard.Error.Logic;
 
 namespace Xlent.Lever.Libraries2.Standard.Assert
 {
@@ -12,7 +11,8 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// FulcrumValidate that the properties are OK. The validation should be made with methods from the <see cref="Validate"/> class.
         /// </summary>
         /// <exception cref="FulcrumAssertionFailedException">A validation failed.</exception>
-        /// <param name="errorLocaction">A unique errorLocaction for the part of errorLocaction where the validation check was made.</param>
-        void Validate(string errorLocaction);
+        /// <param name="errorLocation">A unique errorLocation for the part of errorLocation where the validation check was made.</param>
+        /// <param name="propertyPath">The path of properties up to this validation.</param>
+        void Validate(string errorLocation, string propertyPath = "");
     }
 }

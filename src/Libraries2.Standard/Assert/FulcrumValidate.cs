@@ -1,5 +1,5 @@
 ﻿using System;
-using Xlent.Lever.Libraries2.Standard.Error;
+using System.Collections.Generic;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
 
 namespace Xlent.Lever.Libraries2.Standard.Assert
@@ -68,6 +68,26 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
+        /// Call the Validate() method for <paramref name="value"/>
+        /// </summary>
+        public static void IsValidated(IValidatable value, string propertyPath, string propertyName, string errorLocation, string customMessage = null)
+        {
+            value?.Validate(errorLocation, $"{propertyPath}.{propertyName}");
+        }
+
+        /// <summary>
+        /// Call the Validate() method for each item in <paramref name="values"/>
+        /// </summary>
+        public static void IsValidated(IEnumerable<IValidatable> values, string propertyPath, string propertyName, string errorLocation, string customMessage = null)
+        {
+            if (values == null) return;
+            foreach (var value in values)
+            {
+                IsValidated(value, propertyPath, propertyName, errorLocation, customMessage);
+            }
+        }
+
+        /// <summary>
         /// Verify that <paramref name="propertyValue"/> is equal to <paramref name="expectedValue"/>.
         /// </summary>
         public static void AreEqual(object expectedValue, object propertyValue, string propertyName, string errorLocation, string customMessage = null)
@@ -127,3 +147,4 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
     }
 }
+

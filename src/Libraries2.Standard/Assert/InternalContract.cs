@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
-using Xlent.Lever.Libraries2.Standard.Error;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
 
 namespace Xlent.Lever.Libraries2.Standard.Assert
@@ -23,7 +23,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that <paramref name="parameterValue"/> is not null.
         /// </summary>
-        public static void RequireNotNull<TParameter>(TParameter parameterValue, string parameterName, string customMessage = null)
+        public static void RequireNotNull(object parameterValue, string parameterName, string customMessage = null)
         {
             GenericContract<FulcrumContractException>.RequireNotNull(parameterValue, parameterName, customMessage);
         }
@@ -47,12 +47,13 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// If <paramref name="parameterValue"/> is not null, then call the FulcrumValidate() method of that type.
         /// </summary>
+        [Obsolete("Use the RequireValidated() method.")]
         public static void RequireValidatedOrNull(IValidatable parameterValue, string parameterName, string customMessage = null)
         {
             if (parameterValue == null) return;
             try
             {
-                parameterValue.Validate($"{Namespace}: FA88DA6F-8EA4-414F-86EE-34F4B7A14E40");
+                parameterValue.Validate($"{Namespace}: F8A9DE78-28E2-4FC1-A1D7-88020E720525");
             }
             catch (FulcrumContractException e)
             {
@@ -61,12 +62,64 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
+        /// If <paramref name="parameterValues"/> is not null, then call the FulcrumValidate() method of that type.
+        /// </summary>
+        [Obsolete("Use the RequireValidated() method.")]
+        public static void RequireValidatedOrNull(IEnumerable<IValidatable> parameterValues, string parameterName, string customMessage = null)
+        {
+            if (parameterValues == null) return;
+            foreach (var parameterValue in parameterValues)
+            {
+                RequireValidatedOrNull(parameterValue, parameterName, customMessage);
+            }
+        }
+
+        /// <summary>
         /// Verify that <paramref name="parameterValue"/> is not null and also call the FulcrumValidate() method of that type.
         /// </summary>
+        [Obsolete("Use the RequireValidated() method.")]
         public static void RequireValidatedAndNotNull(IValidatable parameterValue, string parameterName, string customMessage = null)
         {
             RequireNotNull(parameterValue, parameterName);
             RequireValidatedOrNull(parameterValue, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValues"/> is not null and also call the FulcrumValidate() method of that type.
+        /// </summary>
+        [Obsolete("Use the RequireValidated() method.")]
+        public static void RequireValidatedAndNotNull(IEnumerable<IValidatable> parameterValues, string parameterName, string customMessage = null)
+        {
+            RequireNotNull(parameterValues, parameterName);
+            RequireValidatedOrNull(parameterValues, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// If <paramref name="parameterValue"/> is not null, then call the Validate() method of that type.
+        /// </summary>
+        public static void RequireValidated(IValidatable parameterValue, string parameterName, string customMessage = null)
+        {
+            if (parameterValue == null) return;
+            try
+            {
+                parameterValue.Validate($"{Namespace}: F8A9DE78-28E2-4FC1-A1D7-88020E720525");
+            }
+            catch (FulcrumContractException e)
+            {
+                throw new FulcrumContractException(customMessage ?? $"Validation failed for {parameterName}: {e.Message}", e);
+            }
+        }
+
+        /// <summary>
+        /// If <paramref name="parameterValues"/> is not null, then call the Validate() method for each item.
+        /// </summary>
+        public static void RequireValidated(IEnumerable<IValidatable> parameterValues, string parameterName, string customMessage = null)
+        {
+            if (parameterValues == null) return;
+            foreach (var parameterValue in parameterValues)
+            {
+                RequireValidated(parameterValue, parameterName, customMessage);
+            }
         }
 
         /// <summary>
