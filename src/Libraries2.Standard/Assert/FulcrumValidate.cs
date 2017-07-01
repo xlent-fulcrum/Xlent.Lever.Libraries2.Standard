@@ -52,7 +52,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         {
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
             InternalContract.RequireNotNull(propertyName, nameof(propertyName));
-            var message = customMessage ?? $"Property {propertyName} ({value}) must not have the default value ({default(T)}.";
+            var message = customMessage ?? $"Property {propertyName} ({value}) must not have the default propertyValue ({default(T)}.";
             GenericAssert<FulcrumAssertionFailedException>.IsNotDefaultValue(value, errorLocation, message);
         }
 
@@ -144,6 +144,28 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(propertyName, nameof(propertyName));
             var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to be less than ({lesserOrEqualValue}).";
             GenericAssert<FulcrumAssertionFailedException>.IsGreaterThanOrEqualTo(lesserOrEqualValue, propertyValue, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="propertyValue"/> is null or matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesRegExp(string regularExpression, string propertyValue, string propertyName, string errorLocation, string customMessage = null)
+        {
+            InternalContract.RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to match ({regularExpression}).";
+            GenericAssert<FulcrumAssertionFailedException>.MatchesRegExp(regularExpression, propertyValue, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="propertyValue"/> is null or not matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesNotRegExp(string regularExpression, string propertyValue, string propertyName, string errorLocation, string customMessage = null)
+        {
+            InternalContract.RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected property {propertyName} ({propertyValue}) to not match ({regularExpression}).";
+            GenericAssert<FulcrumAssertionFailedException>.MatchesNotRegExp(regularExpression, propertyValue, errorLocation, message);
         }
     }
 }

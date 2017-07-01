@@ -124,6 +124,26 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
+        /// Verify that <paramref name="value"/> is null or matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesRegExp(string regularExpression, string value, string errorLocation, string customMessage = null)
+        {
+            InternalContract.RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericAssert<FulcrumAssertionFailedException>.MatchesRegExp(regularExpression, value, errorLocation, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="value"/> is null or not matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesNotRegExp(string regularExpression, string value, string errorLocation, string customMessage = null)
+        {
+            InternalContract.RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericAssert<FulcrumAssertionFailedException>.MatchesNotRegExp(regularExpression, value, errorLocation, customMessage);
+        }
+
+        /// <summary>
         /// If <paramref name="value"/> is not null, then call the Validate() method of that type.
         /// </summary>
         [Obsolete("Use the IsValidated() method.")]

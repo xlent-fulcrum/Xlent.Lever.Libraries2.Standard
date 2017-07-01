@@ -190,6 +190,26 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is null or matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesRegExp(string regularExpression, string parameterValue, string parameterName, string customMessage = null)
+        {
+            RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            RequireNotNull(parameterName, nameof(parameterName));
+            GenericContract<FulcrumServiceContractException>.RequireMatchesRegExp(regularExpression, parameterValue, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="value"/> is null or not matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesNotRegExp(string regularExpression, string value, string errorLocation, string customMessage = null)
+        {
+            RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericContract<FulcrumServiceContractException>.RequireMatchesNotRegExp(regularExpression, value, errorLocation, customMessage);
+        }
+
+        /// <summary>
         /// Always fail, with the given <paramref name="message"/>.
         /// </summary>
         public static void Fail(string message)

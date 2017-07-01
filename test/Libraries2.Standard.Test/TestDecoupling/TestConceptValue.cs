@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xlent.Lever.Libraries2.Standard.Decoupling.Model;
 
-namespace Libraries2.Standard.Test.LooseCoupling
+namespace Libraries2.Standard.Test.TestDecoupling
 {
     [TestClass]
     public class TestConceptValue

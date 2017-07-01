@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
 
 namespace Xlent.Lever.Libraries2.Standard.Assert
@@ -186,6 +187,30 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
             var message = customMessage ?? $"Expected ({actualValue}) to be greater than or equal to ({lesserOrEqualValue}).";
             IsTrue(actualValue.CompareTo(lesserOrEqualValue) >= 0, errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="value"/> is null or matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesRegExp(string regularExpression, string value, string errorLocation, string customMessage = null)
+        {
+            if (value == null) return;
+            InternalContract.RequireNotNull(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected ({value}) to match regular expression ({regularExpression}).";
+            IsTrue(Regex.IsMatch(value, regularExpression), errorLocation, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="value"/> is null or matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesNotRegExp(string regularExpression, string value, string errorLocation, string customMessage = null)
+        {
+            if (value == null) return;
+            InternalContract.RequireNotNull(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            var message = customMessage ?? $"Expected ({value}) to not match regular expression ({regularExpression}).";
+            IsTrue(!Regex.IsMatch(value, regularExpression), errorLocation, message);
         }
 
         private static void ThrowException(string errorLocation, string message)

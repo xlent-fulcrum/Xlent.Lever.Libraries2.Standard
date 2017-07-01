@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace Xlent.Lever.Libraries2.Standard.Assert
 {
@@ -125,6 +126,30 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             InternalContract.RequireNotNull(parameterName, nameof(parameterName));
             var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must be greater than or equal to ({lesserOrEqualValue}).";
             Require(parameterValue.CompareTo(lesserOrEqualValue) >= 0, message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void RequireMatchesRegExp(string regularExpression, string parameterValue, string parameterName, string customMessage = null)
+        {
+            InternalContract.RequireNotNull(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
+            InternalContract.RequireNotNull(parameterName, nameof(parameterName));
+            var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must match regular expression ({regularExpression}).";
+            Require(Regex.IsMatch(parameterValue, regularExpression), message);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void RequireMatchesNotRegExp(string regularExpression, string parameterValue, string parameterName, string customMessage = null)
+        {
+            InternalContract.RequireNotNull(regularExpression, nameof(regularExpression));
+            InternalContract.RequireNotNull(parameterValue, nameof(parameterValue));
+            InternalContract.RequireNotNull(parameterName, nameof(parameterName));
+            var message = customMessage ?? $"ContractViolation: {parameterName} ({parameterValue}) must not match regular expression ({regularExpression}).";
+            Require(!Regex.IsMatch(parameterValue, regularExpression), message);
         }
 
         private static string GetErrorMessageIfFalse<T>(T parameterValue, Expression<Func<T, bool>> requirementExpression, string parameterName)

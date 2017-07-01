@@ -48,7 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LooseCoupling\TestConceptValue.cs" />
+    <Compile Include="TestDecoupling\TestConceptValue.cs" />
     <Compile Include="TestAssert\TestInternalContract.cs" />
     <Compile Include="Context\TestAsyncLocalValueProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

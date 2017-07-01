@@ -29,7 +29,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
-        /// Verify that <paramref name="parameterValue"/> is not the default value for this type.
+        /// Verify that <paramref name="parameterValue"/> is not the default parameterValue for this type.
         /// </summary>
         public static void RequireNotDefaultValue<TParameter>(TParameter parameterValue, string parameterName, string customMessage = null)
         {
@@ -123,7 +123,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
-        /// Verify that <paramref name="expression"/> returns a true value.
+        /// Verify that <paramref name="expression"/> returns a true parameterValue.
         /// </summary>
         public static void Require(Expression<Func<bool>> expression, string customMessage = null)
         {
@@ -184,6 +184,26 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             RequireNotNull(parameterValue, nameof(parameterValue));
             RequireNotNull(parameterName, nameof(parameterName));
             GenericContract<FulcrumContractException>.RequireLessThanOrEqualTo(lesserOrEqualValue, parameterValue, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="parameterValue"/> is null or matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesRegExp(string regularExpression, string parameterValue, string parameterName, string customMessage = null)
+        {
+            RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            RequireNotNull(parameterName, nameof(parameterName));
+            GenericContract<FulcrumContractException>.RequireMatchesRegExp(regularExpression, parameterValue, parameterName, customMessage);
+        }
+
+        /// <summary>
+        /// Verify that <paramref name="value"/> is null or not matches the regular expression <paramref name="regularExpression"/>.
+        /// </summary>
+        public static void MatchesNotRegExp(string regularExpression, string value, string errorLocation, string customMessage = null)
+        {
+            RequireNotNullOrWhitespace(regularExpression, nameof(regularExpression));
+            RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericContract<FulcrumContractException>.RequireMatchesNotRegExp(regularExpression, value, errorLocation, customMessage);
         }
 
         /// <summary>
