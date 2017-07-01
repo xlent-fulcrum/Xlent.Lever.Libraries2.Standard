@@ -1,4 +1,5 @@
 ﻿using System;
+using Libraries2.Standard.Test.Support;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xlent.Lever.Libraries2.Standard.Assert;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
@@ -187,6 +188,37 @@ namespace Libraries2.Standard.Test.TestAssert
             catch (FulcrumContractException fulcrumException)
             {
                 Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(parameterName));
+            }
+            catch (Exception e)
+            {
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void IsValidatedOk()
+        {
+            var validatable = new Validatable
+            {
+                Name = "Jim"
+            };
+            InternalContract.RequireValidated(validatable, nameof(validatable));
+        }
+
+        [TestMethod]
+        public void IsValidatedFail()
+        {
+            try
+            {
+                var validatable = new Validatable();
+                InternalContract.RequireValidated(validatable, nameof(validatable));
+                Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumContractException fulcrumException)
+            {
+                Assert.IsNotNull(fulcrumException?.TechnicalMessage);
+                Assert.IsTrue(fulcrumException.TechnicalMessage.StartsWith("Validation failed"));
+                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains("Property Name"));
             }
             catch (Exception e)
             {

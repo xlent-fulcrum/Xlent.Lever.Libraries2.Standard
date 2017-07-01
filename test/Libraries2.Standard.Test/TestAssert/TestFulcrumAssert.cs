@@ -1,4 +1,5 @@
 ﻿using System;
+using Libraries2.Standard.Test.Support;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xlent.Lever.Libraries2.Standard.Assert;
 using Xlent.Lever.Libraries2.Standard.Error.Logic;
@@ -107,7 +108,7 @@ namespace Libraries2.Standard.Test.TestAssert
         [TestMethod]
         public void AreEqualAssertionOk()
         {
-            FulcrumAssert.AreEqual(10, 5*2, $"{Namespace}: 6BC20889-87A4-450A-A326-D352A2FEBD81");
+            FulcrumAssert.AreEqual(10, 5 * 2, $"{Namespace}: 6BC20889-87A4-450A-A326-D352A2FEBD81");
         }
 
         [TestMethod]
@@ -122,6 +123,36 @@ namespace Libraries2.Standard.Test.TestAssert
             catch (FulcrumAssertionFailedException fulcrumException)
             {
                 Assert.IsNotNull(fulcrumException.TechnicalMessage.Contains(message));
+            }
+            catch (Exception e)
+            {
+                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
+            }
+        }
+
+        [TestMethod]
+        public void IsValidatedOk()
+        {
+            var validatable = new Validatable
+            {
+                Name = "Jim"
+            };
+            FulcrumAssert.IsValidated(validatable, $"{Namespace}: DCB46FEB-9347-47CC-9307-10702F8026E4");
+        }
+
+        [TestMethod]
+        public void IsValidatedFail()
+        {
+            try
+            {
+                var validatable = new Validatable();
+                FulcrumAssert.IsValidated(validatable, $"{Namespace}: ng");
+                Assert.Fail("An exception should have been thrown");
+            }
+            catch (FulcrumAssertionFailedException fulcrumException)
+            {
+                Assert.IsNotNull(fulcrumException?.TechnicalMessage);
+                Assert.IsTrue(fulcrumException.TechnicalMessage.StartsWith("Property Name"));
             }
             catch (Exception e)
             {

@@ -107,7 +107,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             {
                 parameterValue.Validate($"{Namespace}: E1774ECE-78BC-40B4-B9FD-2293BBF4D944");
             }
-            catch (FulcrumServiceContractException e)
+            catch (FulcrumAssertionFailedException e)
             {
                 throw new FulcrumServiceContractException($"Validation failed for {parameterName}: {e.Message}", e);
             }

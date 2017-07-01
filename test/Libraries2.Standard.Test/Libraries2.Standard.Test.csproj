@@ -46,8 +46,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Support\Class1.cs" />
     <Compile Include="TestDecoupling\TestConceptValue.cs" />
     <Compile Include="TestAssert\TestInternalContract.cs" />
     <Compile Include="Context\TestAsyncLocalValueProvider.cs" />
