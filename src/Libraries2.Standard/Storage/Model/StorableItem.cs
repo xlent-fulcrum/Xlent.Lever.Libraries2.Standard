@@ -19,10 +19,10 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
         public TId Id { get; set; }
 
         /// <inheritdoc />
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <inheritdoc />
-        public string ETag { get; set; }
+        public virtual string ETag { get; set; }
 
         /// <inheritdoc />
         public abstract void Validate(string errorLocation, string propertyPath = "");

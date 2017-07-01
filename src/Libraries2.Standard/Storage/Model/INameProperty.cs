@@ -11,6 +11,6 @@
         /// <remarks>
         /// Does not have to be unique among items.
         /// </remarks>
-        string Name { get; set; }
+        string Name { get; }
     }
 }
