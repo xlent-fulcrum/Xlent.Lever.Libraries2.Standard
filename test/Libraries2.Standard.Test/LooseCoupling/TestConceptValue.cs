@@ -1,13 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Xlent.Lever.Libraries2.Standard.LooseCoupling;
+using Xlent.Lever.Libraries2.Standard.Decoupling.Model;
 
 namespace Libraries2.Standard.Test.LooseCoupling
 {
     [TestClass]
     public class TestConceptValue
     {
-        private static readonly string Namespace = typeof(TestConceptValue).Namespace;
-
         [TestMethod]
         public void ParseContext()
         {

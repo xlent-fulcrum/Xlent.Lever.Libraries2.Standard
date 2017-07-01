@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Xlent.Lever.Libraries2.Standard.Assert;
 
-namespace Xlent.Lever.Libraries2.Standard.LooseCoupling
+namespace Xlent.Lever.Libraries2.Standard.Decoupling.Model
 {
     /// <summary>
     /// An important tool for loose coupling. Annotates system specific values with information that makes the value system independent.

@@ -5,7 +5,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
     /// <summary>
     /// This interface means that you implement ETag to achieve optimistic concurrency control, https://en.wikipedia.org/wiki/Optimistic_concurrency_control
     /// </summary>
-    public interface IETag : IValidatable
+    public interface IOptimisticConcurrencyControlByETag : IValidatable
     {
         /// <summary>
         /// ETag is a pattern to achieve optimistic concurrency control 

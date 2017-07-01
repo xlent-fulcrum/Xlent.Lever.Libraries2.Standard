@@ -6,7 +6,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
     /// 
     /// </summary>
     public interface IPageEnvelope<TData, TId>
-        where TData : IStorable<TId>
+        where TData : IStorableItem<TId>
     {
         /// <summary>
         /// The data in this segment, this "page"

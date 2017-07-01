@@ -78,7 +78,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// </summary>
         public static void IsNotNull(Expression<Func<object>> expression, string errorLocation, string customMessage = null)
         {
-            InternalContract.RequireNotNull((object) expression, nameof(expression));
+            InternalContract.RequireNotNull(expression, nameof(expression));
             var value = expression.Compile()();
             if (value != null) return;
             ThrowException(errorLocation, customMessage ?? $"Did not expect '{expression.Body}' to be null.");

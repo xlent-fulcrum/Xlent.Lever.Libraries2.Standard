@@ -6,10 +6,10 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
     /// Properties required to be a storable class
     /// </summary>
     /// <typeparam name="TId">The type for the property <see cref="Id"/>.</typeparam>
-    public interface IStorable<TId> : IValidatable
+    public interface IStorableItem<TId> : IValidatable
     {
         /// <summary>
-        /// The id for the storable item.
+        /// A unique identifier for the item.
         /// </summary>
         TId Id { get; set; }
     }
