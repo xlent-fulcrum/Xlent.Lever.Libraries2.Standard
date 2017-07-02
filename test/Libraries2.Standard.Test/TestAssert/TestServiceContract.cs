@@ -134,26 +134,6 @@ namespace Libraries2.Standard.Test.TestAssert
         }
 
         [TestMethod]
-        public void FalseExpression()
-        {
-            const string message = "fail because expression is false";
-            try
-            {
-                // ReSharper disable once ExpressionIsAlwaysNull
-                ServiceContract.Require(() => false, message);
-                Assert.Fail("An exception should have been thrown");
-            }
-            catch (FulcrumServiceContractException fulcrumException)
-            {
-                Assert.IsTrue(fulcrumException.TechnicalMessage.Contains(message));
-            }
-            catch (Exception e)
-            {
-                Assert.Fail($"Expected a specific FulcrumException but got {e.GetType().FullName}.");
-            }
-        }
-
-        [TestMethod]
         public void FalseParameterExpression()
         {
             const string parameterName = "parameterName";

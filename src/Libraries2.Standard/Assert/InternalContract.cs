@@ -125,9 +125,11 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that <paramref name="expression"/> returns a true parameterValue.
         /// </summary>
-        public static void Require(Expression<Func<bool>> expression, string customMessage = null)
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
+        public static void Require(Expression<Func<bool>> expression, string message)
         {
-            GenericContract<FulcrumContractException>.Require(expression, customMessage);
+            InternalContract.RequireNotNullOrWhitespace(message, nameof(message));
+            GenericContract<FulcrumContractException>.Require(expression, message);
         }
 
         /// <summary>

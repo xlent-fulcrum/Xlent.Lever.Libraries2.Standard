@@ -76,6 +76,15 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
+        /// Verify that <paramref name="actualValue"/> is not equal to <paramref name="expectedValue"/>.
+        /// </summary>
+        public static void AreNotEqual(object expectedValue, object actualValue, string errorLocation, string customMessage = null)
+        {
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            GenericAssert<FulcrumAssertionFailedException>.AreNotEqual(expectedValue, actualValue, errorLocation, customMessage);
+        }
+
+        /// <summary>
         /// Verify that <paramref name="actualValue"/> is less than to <paramref name="greaterValue"/>.
         /// </summary>
         public static void IsLessThan<T>(T greaterValue, T actualValue, string errorLocation, string customMessage = null)

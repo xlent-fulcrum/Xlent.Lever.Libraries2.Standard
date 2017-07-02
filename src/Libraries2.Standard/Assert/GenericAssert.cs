@@ -36,6 +36,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that the result of <paramref name="expression"/> is true.
         /// </summary>
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
         public static void IsTrue(Expression<Func<bool>> expression, string errorLocation, string customMessage = null)
         {
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
@@ -57,6 +58,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that the result of <paramref name="expression"/> is null.
         /// </summary>
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
         public static void IsNull(Expression<Func<object>> expression, string errorLocation, string customMessage = null)
         {
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
@@ -77,6 +79,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that the result of <paramref name="expression"/> is null.
         /// </summary>
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
         public static void IsNotNull(Expression<Func<object>> expression, string errorLocation, string customMessage = null)
         {
             InternalContract.RequireNotNull(expression, nameof(expression));
@@ -108,6 +111,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that the result of <paramref name="expression"/> is not null, not empty and contains other characters than white space.
         /// </summary>
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
         public static void IsNotNullOrWhiteSpace(Expression<Func<string>> expression, string errorLocation, string customMessage = null)
         {
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
@@ -127,8 +131,19 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         }
 
         /// <summary>
+        /// Verify that <paramref name="actualValue"/> is not equal to <paramref name="expectedValue"/>.
+        /// </summary>
+        public static void AreNotEqual(object expectedValue, object actualValue, string errorLocation, string customMessage = null)
+        {
+            InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));
+            if (!Equals(expectedValue, actualValue)) return;
+            ThrowException(errorLocation, customMessage ?? $"Expected ({actualValue}) to not be equal to ({expectedValue}).");
+        }
+
+        /// <summary>
         /// Verify that the result of <paramref name="expression"/> is equal to <paramref name="expectedValue"/>.
         /// </summary>
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
         public static void AreEqual(object expectedValue, Expression<Func<string>> expression, string errorLocation, string customMessage = null)
         {
             InternalContract.RequireNotNull(errorLocation, nameof(errorLocation));

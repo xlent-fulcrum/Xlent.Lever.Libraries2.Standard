@@ -51,6 +51,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that <paramref name="expression"/> returns a true value.
         /// </summary>
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
         public static void Require(Expression<Func<bool>> expression, string customMessage = null)
         {
             var message = GetErrorMessageIfFalse(expression, customMessage);
@@ -179,6 +180,7 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
             return customMessage ?? $"Contract violation: {parameterName} ({value}) must not be null, empty or whitespace.";
         }
 
+        [Obsolete("Please notify the Fulcrum team if you use this assertion method. We intend to remove it.")]
         private static string GetErrorMessageIfFalse(Expression<Func<bool>> requirementExpression, string customMessage)
         {
             if (requirementExpression.Compile()()) return null;

@@ -29,12 +29,20 @@ namespace Xlent.Lever.Libraries2.Standard.Error.Logic
         /// <summary>
         /// Constructor
         /// </summary>
-        public FulcrumAssertionFailedException() : this(null, null) { }
+        public FulcrumAssertionFailedException() : this(null, (Exception)null) { }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public FulcrumAssertionFailedException(string message) : this(message, null) { }
+        public FulcrumAssertionFailedException(string message) : this(message, (Exception)null) { }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public FulcrumAssertionFailedException(string message, string errorLocation) : this(message, (Exception) null)
+        {
+            ErrorLocation = errorLocation;
+        }
 
         /// <summary>
         /// Constructor
