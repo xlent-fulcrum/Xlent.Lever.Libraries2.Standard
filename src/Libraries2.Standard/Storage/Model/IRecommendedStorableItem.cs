@@ -6,7 +6,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
     /// <summary>
     /// The recommended interfaces for a storable item. Uses a <see cref="Guid"/> as the <see cref="IStorableItem{TId}.Id"/>.
     /// </summary>
-    public interface IStorableItemRecommended : IStorableItemRecommended<Guid>
+    public interface IRecommendedStorableItem : IRecommendedStorableItem<Guid>
     {
     }
 
@@ -14,7 +14,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
     /// The recommended interfaces for a storable item.
     /// </summary>
     /// <typeparam name="TId"></typeparam>
-    public interface IStorableItemRecommended<TId> : IStorableItem<TId>, INameProperty, IOptimisticConcurrencyControlByETag
+    public interface IRecommendedStorableItem<TId> : IStorableItem<TId>, INameProperty, IOptimisticConcurrencyControlByETag
     {
     }
 }

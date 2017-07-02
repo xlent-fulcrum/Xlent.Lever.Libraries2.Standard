@@ -13,7 +13,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
     /// A convenience class that implements the recommended interfaces for a storable item.
     /// </summary>
     /// <typeparam name="TId"></typeparam>
-    public abstract class StorableItem<TId> : IStorableItemRecommended<TId>
+    public abstract class StorableItem<TId> : IRecommendedStorableItem<TId>
     {
         /// <inheritdoc />
         public TId Id { get; set; }
