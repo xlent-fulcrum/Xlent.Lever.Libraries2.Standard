@@ -19,7 +19,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
         public TId Id { get; set; }
 
         /// <inheritdoc />
-        public virtual string Name { get; set; }
+        public abstract string Name { get; }
 
         /// <inheritdoc />
         public virtual string ETag { get; set; }
