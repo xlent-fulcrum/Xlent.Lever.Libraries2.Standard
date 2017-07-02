@@ -10,7 +10,7 @@ namespace Libraries2.Standard.Test.Storage
     /// A storable item to be used in testing
     /// </summary>
     /// <typeparam name="TId"></typeparam>
-    internal class PersonStorableItem<TId> : StorableItem<TId>, IStorableItemForTesting<TId>, IDeepCopy<PersonStorableItem<TId>>
+    internal class PersonStorableItem<TId> : StorableItem<TId>, IDeepCopy<PersonStorableItem<TId>>, IStorableItemForTesting<PersonStorableItem<TId>, TId>
     {
         public PersonStorableItem()
         {
@@ -86,7 +86,7 @@ namespace Libraries2.Standard.Test.Storage
             return Name;
         }
 
-        public IStorableItem<TId> InitializeWithDataForTesting(TypeOfTestDataEnum typeOfTestData)
+        public PersonStorableItem<TId> InitializeWithDataForTesting(TypeOfTestDataEnum typeOfTestData)
         {
             switch (typeOfTestData)
             {
@@ -108,7 +108,7 @@ namespace Libraries2.Standard.Test.Storage
             return this;
         }
 
-        public IStorableItem<TId> ChangeDataToNotEqualForTesting()
+        public PersonStorableItem<TId> ChangeDataToNotEqualForTesting()
         {
             GivenName = Guid.NewGuid().ToString();
             return this;

@@ -138,9 +138,10 @@ namespace Xlent.Lever.Libraries2.Standard.Assert
         /// <summary>
         /// Verify that <paramref name="mustBeTrue"/> really is true.
         /// </summary>
-        public static void Require(bool mustBeTrue, string customMessage = null)
+        public static void Require(bool mustBeTrue, string message)
         {
-            GenericContract<FulcrumServiceContractException>.Require(mustBeTrue, customMessage);
+            InternalContract.RequireNotNullOrWhitespace(message, nameof(message));
+            GenericContract<FulcrumServiceContractException>.Require(mustBeTrue, message);
         }
 
         /// <summary>
