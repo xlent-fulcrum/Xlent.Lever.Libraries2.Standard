@@ -14,7 +14,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Model
     /// The recommended interfaces for a storable item.
     /// </summary>
     /// <typeparam name="TId"></typeparam>
-    public interface IRecommendedStorableItem<TId> : IStorableItem<TId>, INameProperty, IOptimisticConcurrencyControlByETag
+    public interface IRecommendedStorableItem<TId> : IStorableItem<TId>, IOptimisticConcurrencyControlByETag
     {
     }
 }

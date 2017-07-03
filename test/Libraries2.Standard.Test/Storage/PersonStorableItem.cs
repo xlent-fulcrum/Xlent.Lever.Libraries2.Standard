@@ -39,11 +39,11 @@ namespace Libraries2.Standard.Test.Storage
         public string Surname { get; set; }
 
     }
-    internal partial class PersonStorableItem<TId> : StorableItem<TId>
+    internal partial class PersonStorableItem<TId> : StorableItem<TId>, INameProperty
     {
         #region IPersonProperty
         /// <inheritdoc />
-        public override string Name => $"{GivenName} {Surname}";
+        public string Name => $"{GivenName} {Surname}";
         #endregion
 
         #region IValidate

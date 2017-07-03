@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Xlent.Lever.Libraries2.Standard</id>
-    <version>1.8.0</version>
+    <version>1.8.1</version>
     <authors>XLENT Fulcrum</authors>
     <projectUrl>https://github.com/xlent-fulcrum/Xlent.Lever.Libraries2.Standard</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,6 +11,7 @@
     <summary>Fulcrum library based on .NET Standard.</summary>
     <copyright>Copyright ©2017 Xlent Business Integration AB</copyright>
     <releaseNotes>
+      1.8.1 INameProperty is now not a part of IRecommendedStorableItem
       1.8.0 Changed the signature for MemoryStorage.
       1.7.3 Minor changes for testing storage implementations.
       1.7.2 Changed a parameter to mandatory for contract tests.
