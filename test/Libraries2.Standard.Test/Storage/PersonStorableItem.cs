@@ -10,11 +10,11 @@ namespace Libraries2.Standard.Test.Storage
     /// A storable item to be used in testing
     /// </summary>
     /// <typeparam name="TId"></typeparam>
-    internal class PersonStorableItem<TId> : StorableItem<TId>, IDeepCopy<PersonStorableItem<TId>>, IStorableItemForTesting<PersonStorableItem<TId>, TId>
+    internal partial class PersonStorableItem<TId>
     {
         public PersonStorableItem()
         {
-            
+
         }
 
         /// <summary>
@@ -38,16 +38,25 @@ namespace Libraries2.Standard.Test.Storage
         /// </summary>
         public string Surname { get; set; }
 
+    }
+    internal partial class PersonStorableItem<TId> : StorableItem<TId>
+    {
+        #region IPersonProperty
         /// <inheritdoc />
         public override string Name => $"{GivenName} {Surname}";
+        #endregion
 
+        #region IValidate
         /// <inheritdoc />
         public override void Validate(string errorLocation, string propertyPath = "")
         {
             FulcrumValidate.IsNotNullOrWhiteSpace(GivenName, nameof(GivenName), errorLocation);
             FulcrumValidate.IsNotNullOrWhiteSpace(Surname, nameof(Surname), errorLocation);
         }
-
+        #endregion
+    }
+    internal partial class PersonStorableItem<TId> : IDeepCopy<PersonStorableItem<TId>>
+    {
         public PersonStorableItem<TId> DeepCopy()
         {
             var target = new PersonStorableItem<TId>
@@ -59,33 +68,10 @@ namespace Libraries2.Standard.Test.Storage
             };
             return target;
         }
+    }
 
-        /// <inheritdoc />
-        public override bool Equals(object obj)
-        {
-            var person = obj as PersonStorableItem<TId>;
-            if (person == null) return false;
-            if (!Equals(person.Id, Id)) return false;
-            if (!string.Equals(person.ETag, ETag, StringComparison.OrdinalIgnoreCase)) return false;
-            if (!string.Equals(person.GivenName, GivenName, StringComparison.OrdinalIgnoreCase)) return false;
-            // ReSharper disable once ConvertIfStatementToReturnStatement
-            if (!string.Equals(person.Surname, Surname, StringComparison.OrdinalIgnoreCase)) return false;
-            return true;
-        }
-
-        /// <inheritdoc />
-        public override int GetHashCode()
-        {
-            // ReSharper disable once NonReadonlyMemberInGetHashCode
-            return Id.GetHashCode();
-        }
-
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            return Name;
-        }
-
+    internal partial class PersonStorableItem<TId> : IStorableItemForTesting<PersonStorableItem<TId>, TId>
+    {
         public PersonStorableItem<TId> InitializeWithDataForTesting(TypeOfTestDataEnum typeOfTestData)
         {
             switch (typeOfTestData)
@@ -114,4 +100,35 @@ namespace Libraries2.Standard.Test.Storage
             return this;
         }
     }
+
+    #region override object
+    internal partial class PersonStorableItem<TId>
+    {
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            var person = obj as PersonStorableItem<TId>;
+            if (person == null) return false;
+            if (!Equals(person.Id, Id)) return false;
+            if (!string.Equals(person.ETag, ETag, StringComparison.OrdinalIgnoreCase)) return false;
+            if (!string.Equals(person.GivenName, GivenName, StringComparison.OrdinalIgnoreCase)) return false;
+            // ReSharper disable once ConvertIfStatementToReturnStatement
+            if (!string.Equals(person.Surname, Surname, StringComparison.OrdinalIgnoreCase)) return false;
+            return true;
+        }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            // ReSharper disable once NonReadonlyMemberInGetHashCode
+            return Id.GetHashCode();
+        }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+    #endregion
 }

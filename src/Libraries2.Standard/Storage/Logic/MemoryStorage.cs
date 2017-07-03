@@ -13,14 +13,14 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
     /// General class for storing any <see cref="IStorableItem{Guid}"/> in memory.
     /// </summary>
     /// <typeparam name="TStorableItem"></typeparam>
-    public class MemoryStorage<TStorableItem> : ICrudAll<IStorableItem<Guid>, Guid>
+    public class MemoryStorage<TStorableItem> : ICrudAll<TStorableItem, Guid>
         where TStorableItem : class, IStorableItem<Guid>, IOptimisticConcurrencyControlByETag, IDeepCopy<TStorableItem>
     {
         private static readonly string Namespace = typeof(MemoryStorage<TStorableItem>).Namespace;
-        private readonly Dictionary<Guid, IStorableItem<Guid>> _memoryItems = new Dictionary<Guid, IStorableItem<Guid>>();
+        private readonly Dictionary<Guid, TStorableItem> _memoryItems = new Dictionary<Guid, TStorableItem>();
 
         /// <inheritdoc />
-        public Task<IStorableItem<Guid>> CreateAsync(IStorableItem<Guid> item)
+        public Task<TStorableItem> CreateAsync(TStorableItem item)
         {
             InternalContract.RequireNotNull(item, nameof(item));
             InternalContract.RequireValidated(item, nameof(item));
@@ -29,7 +29,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
         }
 
         /// <inheritdoc />
-        public Task<IStorableItem<Guid>> CreateAsync(Guid id, IStorableItem<Guid> item)
+        public Task<TStorableItem> CreateAsync(Guid id, TStorableItem item)
         {
             InternalContract.RequireNotDefaultValue(id, nameof(id));
             InternalContract.RequireNotNull(item, nameof(item));
@@ -47,7 +47,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
         }
 
         /// <inheritdoc />
-        public Task<IStorableItem<Guid>> ReadAsync(Guid id)
+        public Task<TStorableItem> ReadAsync(Guid id)
         {
             InternalContract.RequireNotDefaultValue(id, nameof(id));
 
@@ -59,7 +59,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
         }
 
         /// <inheritdoc />
-        public Task<IStorableItem<Guid>> UpdateAsync(IStorableItem<Guid> item)
+        public Task<TStorableItem> UpdateAsync(TStorableItem item)
         {
             InternalContract.RequireNotNull(item, nameof(item));
             InternalContract.RequireValidated(item, nameof(item));
@@ -93,7 +93,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
         }
 
         /// <inheritdoc />
-        public Task<IPageEnvelope<IStorableItem<Guid>, Guid>> ReadAllAsync(int offset = 0, int limit = 100)
+        public Task<IPageEnvelope<TStorableItem, Guid>> ReadAllAsync(int offset = 0, int limit = 100)
         {
             InternalContract.RequireGreaterThanOrEqualTo(0, offset, nameof(offset));
             InternalContract.RequireGreaterThan(0, limit, nameof(limit));
@@ -101,7 +101,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
             {
                 var keys = _memoryItems.Keys.Skip(offset).Take(limit);
                 var list = keys.Select(GetMemoryItem).ToList();
-                IPageEnvelope<IStorableItem<Guid>, Guid> page = new PageEnvelope<IStorableItem<Guid>, Guid>
+                IPageEnvelope<TStorableItem, Guid> page = new PageEnvelope<TStorableItem, Guid>
                 {
                     PageInfo = new PageInfo
                     {
@@ -153,11 +153,10 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
                 $"The item of type {typeof(TStorableItem).Name} with id {item.Id} has been updated by someone else. Please get a fresh copy and try again.");
         }
 
-        private static TStorableItem CopyItem(IStorableItem<Guid> item)
+        private static TStorableItem CopyItem(TStorableItem item)
         {
-            var storableItem = item as TStorableItem;
-            FulcrumAssert.IsNotNull(storableItem, $"{Namespace}: 8EA4FC22-63CF-40AA-A53F-40444A23E14D");
-            var itemCopy = storableItem?.DeepCopy();
+            InternalContract.RequireNotNull(item, nameof(item));
+            var itemCopy = item?.DeepCopy();
             if (itemCopy == null)
                 throw new FulcrumAssertionFailedException("Could not copy an item.",
                     $"{Namespace}: F517B23A-CB23-4B69-A3AE-7F52CD804352");
@@ -169,7 +168,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Logic
             _memoryItems[item.Id] = CopyItem(item);
         }
 
-        private IStorableItem<Guid> GetMemoryItem(Guid id)
+        private TStorableItem GetMemoryItem(Guid id)
         {
             ValidateExists(id);
             InternalContract.RequireNotDefaultValue(id, nameof(id));

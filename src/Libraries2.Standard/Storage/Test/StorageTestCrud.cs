@@ -11,7 +11,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Test
     /// Tests for testing any storage that implements <see cref="ICrud{TStorable,Guid}"/>
     /// </summary>
     public class StorageTestCrud<TStorage, TTestableItem, TId>
-        where TStorage : ICrud<IStorableItem<TId>, TId>, IDeleteAll<TId>
+        where TStorage : ICrud<TTestableItem, TId>, IDeleteAll<TId>
         where TTestableItem : IStorableItemForTesting<TTestableItem, TId>, IStorableItem<TId>, new()
     {
         /// <summary>
@@ -94,7 +94,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Test
         {
             var methodName = $"{typeof(StorageTestCrud<TStorage, TTestableItem, TId>).FullName}.{typeof(StorageTestCrud<TStorage, TTestableItem, TId>).GetTypeInfo().GetDeclaredMethod(nameof(Update)).Name}";
             var initialItem = new TTestableItem().InitializeWithDataForTesting(TypeOfTestDataEnum.Variant1);
-            var createdItem = (TTestableItem) await Storage.CreateAsync(initialItem);
+            var createdItem = await Storage.CreateAsync(initialItem);
             createdItem.ChangeDataToNotEqualForTesting();
             var updatedItem = await Storage.UpdateAsync(createdItem);
             FulcrumAssert.AreNotEqual(createdItem, updatedItem, $"{methodName}: 99634A93-426C-4E3E-BA42-5040E5CA7755");
@@ -109,10 +109,10 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Test
         {
             var methodName = $"{typeof(StorageTestCrud<TStorage, TTestableItem, TId>).FullName}.{typeof(StorageTestCrud<TStorage, TTestableItem, TId>).GetTypeInfo().GetDeclaredMethod(nameof(UpdateRead)).Name}";
             var initialItem = new TTestableItem().InitializeWithDataForTesting(TypeOfTestDataEnum.Variant1);
-            var createdItem = (TTestableItem) await Storage.CreateAsync(initialItem);
+            var createdItem = await Storage.CreateAsync(initialItem);
             createdItem.ChangeDataToNotEqualForTesting();
-            var updatedItem = (TTestableItem) await Storage.UpdateAsync(createdItem);
-            var readItem = (TTestableItem) await Storage.ReadAsync(createdItem.Id);
+            var updatedItem = await Storage.UpdateAsync(createdItem);
+            var readItem = await Storage.ReadAsync(createdItem.Id);
             FulcrumAssert.AreEqual(updatedItem, readItem, $"{methodName}: 9D3FCD55-C1EA-451E-9A63-CF9543B25273");
         }
 
@@ -124,7 +124,7 @@ namespace Xlent.Lever.Libraries2.Standard.Storage.Test
         {
             var methodName = $"{typeof(StorageTestCrud<TStorage, TTestableItem, TId>).FullName}.{typeof(StorageTestCrud<TStorage, TTestableItem, TId>).GetTypeInfo().GetDeclaredMethod(nameof(Delete)).Name}";
             var initialItem = new TTestableItem().InitializeWithDataForTesting(TypeOfTestDataEnum.Variant1);
-            var createdItem = (TTestableItem) await Storage.CreateAsync(initialItem);
+            var createdItem = await Storage.CreateAsync(initialItem);
             await Storage.ReadAsync(createdItem.Id);
             await Storage.DeleteAsync(createdItem.Id);
             try
